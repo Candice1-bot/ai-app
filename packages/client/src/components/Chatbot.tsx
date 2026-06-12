@@ -61,21 +61,21 @@ const Chatbot = () => {
          handleSubmit(onSubmit)();
       }
    };
-   const onCopyMessage = (e: React.ClipboardEvent) => {
-      const selection = window.getSelection()?.toString().trim();
-      if (selection) {
-         e.preventDefault();
-         // copy the trimmed text into the clipboard
-         e.clipboardData.setData('text/plain', selection);
-      }
-   };
+   // const onCopyMessage = (e: React.ClipboardEvent) => {
+   //    const selection = window.getSelection()?.toString().trim();
+   //    if (selection) {
+   //       e.preventDefault();
+   //       // copy the trimmed text into the clipboard
+   //       e.clipboardData.setData('text/plain', selection);
+   //    }
+   // };
    return (
       <div className="flex flex-col h-full">
          <div className="flex flex-col flex-1 gap-3 mb-10 overflow-y-auto">
             {messages.map((message, index) => (
                <div
                   key={index}
-                  onCopy={onCopyMessage}
+                  // onCopy={onCopyMessage}
                   ref={index === messages.length - 1 ? lastMessageRef : null}
                   className={`px-3 py-1 rounded-xl ${
                      message.role === 'user'

@@ -8,6 +8,7 @@ function App() {
       <div className="p-4 h-screen w-full">
          <Chatbot />
 
+         {/* <Chatbot /> */}
          {/* <Reviews />
           */}
          {/* <ReviewList1 productId={2} /> */}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useRef, useState } from 'react';
-import ChatInput from './ChatInput';
+import ChatInput1, { type ChatFormData } from './ChatInput1';
 import type { Message } from './ChatMessages';
 import ChatMessages from './ChatMessages';
 import TypingIndicator from './TypingIndicator';
@@ -20,16 +20,19 @@ const ChatBot = () => {
    const [isBotTyping, setIsBotTyping] = useState(false);
    const [error, setError] = useState('');
    const conversationId = useRef(crypto.randomUUID());
-   const onSubmit = async (prompt: string) => {
+
+   const onSubmit = async ({ prompt }: ChatFormData) => {
       try {
          setMessages((prev) => [...prev, { content: prompt, role: 'user' }]);
          setIsBotTyping(true);
          setError('');
          popAudio.play();
+
          const { data } = await axios.post<ChatResponse>('/api/chat', {
             prompt,
             conversationId: conversationId.current,
          });
+
          setMessages((prev) => [
             ...prev,
             { content: data.message, role: 'bot' },
@@ -37,7 +40,7 @@ const ChatBot = () => {
          notificationAudio.play();
       } catch (error) {
          console.error(error);
-         setError('Something went wrong, try again!');
+         setError('Something went wrong, please try again!');
       } finally {
          setIsBotTyping(false);
       }
@@ -49,7 +52,7 @@ const ChatBot = () => {
             {isBotTyping && <TypingIndicator />}
             {error && <p className="text-red-500">{error}</p>}
          </div>
-         <ChatInput onSubmit={onSubmit} />
+         <ChatInput1 onSubmit={onSubmit} />
       </div>
    );
 };

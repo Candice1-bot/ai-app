@@ -1,4 +1,4 @@
-import fs, { readFileSync } from 'fs';
+import { readFileSync } from 'fs';
 import path from 'path';
 import { conversationRepository } from '../repositories/conversation.repository.ts';
 
@@ -14,7 +14,7 @@ const template = readFileSync(
    path.resolve(__dirname, '../prompts/chatbot.txt'),
    'utf8'
 );
-const parkInfo = fs.readFileSync(
+const parkInfo = readFileSync(
    path.resolve(__dirname, '../prompts/wonderWorld.md'),
    'utf-8'
 );
